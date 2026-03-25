@@ -3,5 +3,6 @@
 (def default-db
   {:posts    []
    :loading? false
-   :error    nil
-   :expanded #{}})
+   :error        nil
+   :expanded     #{}
+   :current-page 1})

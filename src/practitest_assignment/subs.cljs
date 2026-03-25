@@ -21,3 +21,24 @@
  ::expanded
  (fn [db]
    (:expanded db)))
+
+(re-frame/reg-sub
+ ::current-page
+ (fn [db]
+   (:current-page db)))
+
+(def page-size 10)
+
+(re-frame/reg-sub
+ ::page-count
+ :<- [::posts]
+ (fn [posts _]
+   (js/Math.ceil (/ (count posts) page-size))))
+
+(re-frame/reg-sub
+ ::paginated-posts
+ :<- [::posts]
+ :<- [::current-page]
+ (fn [[posts page] _]
+   (let [start (* (dec page) page-size)]
+     (subvec (vec posts) start (min (+ start page-size) (count posts))))))

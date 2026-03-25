@@ -41,6 +41,11 @@
    (assoc db :loading? false :error error)))
 
 (re-frame/reg-event-db
+ ::set-page
+ (fn [db [_ page]]
+   (assoc db :current-page page)))
+
+(re-frame/reg-event-db
  ::toggle-post
  (fn [db [_ id]]
    (update db :expanded

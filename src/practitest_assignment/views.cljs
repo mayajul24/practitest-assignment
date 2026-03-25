@@ -13,8 +13,24 @@
    (when expanded?
      [:p.post-body (:body post)])])
 
+(defn pagination []
+  (let [current-page @(re-frame/subscribe [::subs/current-page])
+        page-count   @(re-frame/subscribe [::subs/page-count])]
+    [:div.pagination
+     [:button {:disabled (= current-page 1)
+               :on-click #(re-frame/dispatch [::events/set-page (dec current-page)])}
+      "← Prev"]
+     (for [p (range 1 (inc page-count))]
+       ^{:key p}
+       [:button {:class    (when (= p current-page) "active")
+                 :on-click #(re-frame/dispatch [::events/set-page p])}
+        p])
+     [:button {:disabled (= current-page page-count)
+               :on-click #(re-frame/dispatch [::events/set-page (inc current-page)])}
+      "Next →"]]))
+
 (defn post-list []
-  (let [posts    @(re-frame/subscribe [::subs/posts])
+  (let [posts    @(re-frame/subscribe [::subs/paginated-posts])
         expanded @(re-frame/subscribe [::subs/expanded])]
     [:div.post-list
      (for [post posts]
@@ -29,4 +45,6 @@
      (cond
        loading? [:p.loading "Loading posts..."]
        error    [:p.error (str "Error: " error)]
-       :else    [post-list])]))
+       :else    [:<>
+                [post-list]
+                [pagination]])]))
