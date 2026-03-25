@@ -16,3 +16,8 @@
  ::posts
  (fn [db]
    (:posts db)))
+
+(re-frame/reg-sub
+ ::expanded
+ (fn [db]
+   (:expanded db)))

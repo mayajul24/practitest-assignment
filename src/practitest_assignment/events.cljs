@@ -39,3 +39,12 @@
  ::fetch-posts-failure
  (fn [db [_ error]]
    (assoc db :loading? false :error error)))
+
+(re-frame/reg-event-db
+ ::toggle-post
+ (fn [db [_ id]]
+   (update db :expanded
+           (fn [expanded]
+             (if (contains? expanded id)
+               (disj expanded id)
+               (conj expanded id))))))

@@ -3,4 +3,5 @@
 (def default-db
   {:posts    []
    :loading? false
-   :error    nil})
+   :error    nil
+   :expanded #{}})
