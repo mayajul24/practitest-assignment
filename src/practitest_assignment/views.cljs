@@ -13,6 +13,14 @@
    (when expanded?
      [:p.post-body (:body post)])])
 
+(defn search-bar []
+  (let [search @(re-frame/subscribe [::subs/search])]
+    [:input.search-input
+     {:type        "text"
+      :placeholder "Search by title..."
+      :value       search
+      :on-change   #(re-frame/dispatch [::events/set-search (-> % .-target .-value)])}]))
+
 (defn pagination []
   (let [current-page @(re-frame/subscribe [::subs/current-page])
         page-count   @(re-frame/subscribe [::subs/page-count])]
@@ -41,7 +49,9 @@
   (let [loading? @(re-frame/subscribe [::subs/loading?])
         error    @(re-frame/subscribe [::subs/error])]
     [:div.app
-     [:h1.app-title "Posts"]
+     [:div.app-header
+      [:h1.app-title "Posts"]
+      [search-bar]]
      (cond
        loading? [:p.loading "Loading posts..."]
        error    [:p.error (str "Error: " error)]

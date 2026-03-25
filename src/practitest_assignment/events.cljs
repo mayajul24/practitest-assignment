@@ -41,6 +41,11 @@
    (assoc db :loading? false :error error)))
 
 (re-frame/reg-event-db
+ ::set-search
+ (fn [db [_ query]]
+   (assoc db :search query :current-page 1)))
+
+(re-frame/reg-event-db
  ::set-page
  (fn [db [_ page]]
    (assoc db :current-page page)))

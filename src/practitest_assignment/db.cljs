@@ -5,4 +5,5 @@
    :loading? false
    :error        nil
    :expanded     #{}
-   :current-page 1})
+   :current-page 1
+   :search       ""})
