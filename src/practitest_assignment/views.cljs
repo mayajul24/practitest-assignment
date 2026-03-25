@@ -50,7 +50,7 @@
         error    @(re-frame/subscribe [::subs/error])]
     [:div.app
      [:div.app-header
-      [:h1.app-title "Posts"]
+      [:h1.app-title "Practitest Posts"]
       [search-bar]]
      (cond
        loading? [:p.loading "Loading posts..."]
