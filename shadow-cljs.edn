@@ -20,7 +20,7 @@
    :output-dir "resources/public/js/compiled"
    :asset-path "/js/compiled"
    :modules
-   {:app {:init-fn maya-assignment.core/init}}
+   {:app {:init-fn practitest-assignment.core/init}}
    :devtools
    {:preloads []}
    :dev

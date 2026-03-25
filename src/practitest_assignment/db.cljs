@@ -1,0 +1,6 @@
+(ns practitest-assignment.db)
+
+(def default-db
+  {:posts    []
+   :loading? false
+   :error    nil})
