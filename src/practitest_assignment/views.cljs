@@ -56,5 +56,5 @@
        loading? [:p.loading "Loading posts..."]
        error    [:p.error (str "Error: " error)]
        :else    [:<>
-                [post-list]
-                [pagination]])]))
+                 [post-list]
+                 [pagination]])]))

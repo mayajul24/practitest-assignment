@@ -53,8 +53,4 @@
 (re-frame/reg-event-db
  ::toggle-post
  (fn [db [_ id]]
-   (update db :expanded
-           (fn [expanded]
-             (if (contains? expanded id)
-               (disj expanded id)
-               (conj expanded id))))))
+   (update db :expanded #(if (contains? % id) (disj % id) (conj % id)))))

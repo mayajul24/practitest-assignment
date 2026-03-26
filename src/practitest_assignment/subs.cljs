@@ -3,35 +3,16 @@
    [re-frame.core :as re-frame]
    [clojure.string :as str]))
 
-(re-frame/reg-sub
- ::loading?
- (fn [db]
-   (:loading? db)))
+;; Raw subscriptions — direct db lookups
+(re-frame/reg-sub ::loading?     (fn [db] (:loading? db)))
+(re-frame/reg-sub ::error        (fn [db] (:error db)))
+(re-frame/reg-sub ::posts        (fn [db] (:posts db)))
+(re-frame/reg-sub ::expanded     (fn [db] (:expanded db)))
+(re-frame/reg-sub ::current-page (fn [db] (:current-page db)))
+(re-frame/reg-sub ::search       (fn [db] (:search db)))
 
-(re-frame/reg-sub
- ::error
- (fn [db]
-   (:error db)))
-
-(re-frame/reg-sub
- ::posts
- (fn [db]
-   (:posts db)))
-
-(re-frame/reg-sub
- ::expanded
- (fn [db]
-   (:expanded db)))
-
-(re-frame/reg-sub
- ::current-page
- (fn [db]
-   (:current-page db)))
-
-(re-frame/reg-sub
- ::search
- (fn [db]
-   (:search db)))
+;; Derived subscriptions
+(def page-size 10)
 
 (re-frame/reg-sub
  ::filtered-posts
@@ -44,8 +25,6 @@
                (str/lower-case (:title %))
                (str/lower-case search))
              posts))))
-
-(def page-size 10)
 
 (re-frame/reg-sub
  ::page-count
