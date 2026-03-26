@@ -18,7 +18,7 @@
     (rdom/unmount-component-at-node root-el)
     (rdom/render [views/main-panel] root-el)))
 
-(defn init []
+(defn ^:export init []
   (re-frame/dispatch-sync [::events/initialize-db])
   (re-frame/dispatch [::events/fetch-posts])
   (dev-setup)
