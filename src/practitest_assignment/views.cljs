@@ -6,7 +6,8 @@
 
 (defn post-card [post expanded?]
   [:div.post-card
-   {:on-click #(re-frame/dispatch [::events/toggle-post (:id post)])}
+   {:class    (when expanded? "expanded")
+    :on-click #(re-frame/dispatch [::events/toggle-post (:id post)])}
    [:div.post-header
     [:span.post-arrow (if expanded? "▾" "▸")]
     [:h3.post-title (:title post)]]
@@ -48,13 +49,15 @@
 (defn main-panel []
   (let [loading? @(re-frame/subscribe [::subs/loading?])
         error    @(re-frame/subscribe [::subs/error])]
-    [:div.app
-     [:div.app-header
-      [:h1.app-title "Practitest Posts"]
-      [search-bar]]
-     (cond
-       loading? [:p.loading "Loading posts..."]
-       error    [:p.error (str "Error: " error)]
-       :else    [:<>
-                 [post-list]
-                 [pagination]])]))
+    [:<>
+     [:header.navbar
+      [:div.navbar-inner
+       [:h1.app-title "Practitest Posts"]
+       [search-bar]]]
+     [:main.app
+      (cond
+        loading? [:div.loading [:div.spinner]]
+        error    [:p.error (str "Error: " error)]
+        :else    [:<>
+                  [post-list]
+                  [pagination]])]]))
