@@ -36,6 +36,6 @@ Changes to ClojureScript source files are hot-reloaded automatically.
 ## Tech Stack
 
 - [ClojureScript](https://clojurescript.org/)
-- [re-frame](https://github.com/day8/re-frame) — state management
-- [Reagent](https://github.com/reagent-project/reagent) — React wrapper
-- [shadow-cljs](https://github.com/thheller/shadow-cljs) — build tooling
+- [re-frame](https://github.com/day8/re-frame) - state management
+- [Reagent](https://github.com/reagent-project/reagent) - React wrapper
+- [shadow-cljs](https://github.com/thheller/shadow-cljs) - build tooling
